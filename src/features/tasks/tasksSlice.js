@@ -19,7 +19,6 @@ const tasksSlice = createSlice({
     fetchTasksSuccess: (state, action) => {
       state.loading = false;
       state.tasks = action.payload;
-      state.successMessage = "Task added successfully!";
     },
 
     fetchTasksFailure: (state, action) => {
@@ -30,6 +29,20 @@ const tasksSlice = createSlice({
     createTaskRequest: (state) => {
       state.loading = true;
       state.error = null;
+    },
+
+    deleteTaskRequest: (state) => {
+      state.loading = true;
+      state.error = null;
+    },
+
+    updateTaskRequest: (state) => {
+      state.loading = true;
+      state.error = null;
+    },
+
+    operationSuccess: (state, action) => {
+      state.successMessage = action.payload;
     },
 
     createTaskFailure: (state, action) => {
@@ -48,6 +61,9 @@ export const {
   fetchTasksSuccess,
   fetchTasksFailure,
   createTaskRequest,
+  deleteTaskRequest,
+  updateTaskRequest,
+  operationSuccess,
   createTaskFailure,
   clearMessage
 } = tasksSlice.actions;

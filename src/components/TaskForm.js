@@ -20,27 +20,21 @@ export default function TaskForm() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="form-container">
-      <div>
-        <input
-          {...register("title", { required: "Title is required" })}
-          placeholder="Task Title"
-        />
-        {errors.title && (
-          <p className="error">{errors.title.message}</p>
-        )}
-      </div>
+      <input
+        {...register("title", { required: "Title is required" })}
+        placeholder="Task Title"
+      />
+      {errors.title && <p className="error">{errors.title.message}</p>}
 
-      <div>
-        <textarea
-          {...register("description", {
-            required: "Description is required"
-          })}
-          placeholder="Task Description"
-        />
-        {errors.description && (
-          <p className="error">{errors.description.message}</p>
-        )}
-      </div>
+      <textarea
+        {...register("description", {
+          required: "Description is required"
+        })}
+        placeholder="Task Description"
+      />
+      {errors.description && (
+        <p className="error">{errors.description.message}</p>
+      )}
 
       <button type="submit" disabled={loading}>
         {loading ? "Adding..." : "Add Task"}
