@@ -46,13 +46,15 @@ function App() {
         </>
       )}
 
-      {!loading &&
-        tasks.map((task) => (
-          <div key={task.id} className="task-card">
-            <h4>{task.title}</h4>
-            <p>{task.description}</p>
-          </div>
-        ))}
+{!loading &&
+  [...tasks]   // create copy (important)
+    .reverse() // reverse order
+    .map((task) => (
+      <div key={task.id} className="task-card">
+        <h4>{task.title}</h4>
+        <p>{task.description}</p>
+      </div>
+    ))}
     </div>
   );
 }
