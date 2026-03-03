@@ -1,10 +1,28 @@
 {
   "tasks": [
     {
-      "id": "01e2",
-      "title": "hhh",
-      "description": "mmmm",
-      "createdAt": "2026-03-03T17:38:23.506Z"
+      "id": "af87",
+      "title": "test1",
+      "description": "testing",
+      "project": "ats",
+      "type": "Bug",
+      "status": "Todo",
+      "priority": "Low",
+      "assignee": "selvi",
+      "dueDate": "2026-03-05",
+      "createdAt": "2026-03-03T18:10:47.494Z"
+    },
+    {
+      "title": "test2",
+      "description": "funny",
+      "project": "loving",
+      "type": "Feature",
+      "status": "In Progress",
+      "priority": "High",
+      "assignee": "kavi",
+      "dueDate": "2026-03-28",
+      "id": "178d",
+      "createdAt": "2026-03-03T18:11:14.821Z"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

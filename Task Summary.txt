@@ -1,0 +1,172 @@
+#  Task Summary
+
+**Task Management Dashboard – React + Redux Saga Implementation**
+
+---
+
+##  Objective
+
+Develop a task creation feature similar to the provided demo environment where new tasks can:
+
+* Be created using a form
+* Be submitted to an API
+* Be saved persistently
+* Be returned and displayed from the API
+
+The implementation was required using **React, Redux Saga, and React Hook Form**.
+
+---
+
+##  Technology Stack
+
+* React (Functional Components + Hooks)
+* Redux Toolkit (State Management)
+* Redux Saga (Async handling & API side effects)
+* React Hook Form (Form handling & validation)
+* Axios (API calls)
+* JSON Server (Mock REST API)
+
+---
+
+##  Implementation Overview
+
+### 1 Project Setup
+
+* Initialized React application.
+* Configured Redux store with Saga middleware.
+* Created feature-based folder structure for scalability.
+* Connected rootSaga to Redux store.
+
+---
+
+### 2 State Management (Redux Slice)
+
+Managed the following state:
+
+* `tasks` – list of all tasks
+* `loading` – API request status
+* `successMessage` – toast notifications
+* `error` – API error handling
+
+Implemented actions for:
+
+* Fetch tasks
+* Create task
+* Update task
+* Delete task
+* Clear success message
+
+---
+
+### 3 API Integration (Redux Saga)
+
+Used Redux Saga to handle asynchronous operations:
+
+* Fetch tasks on page load
+* POST request for creating new task
+* PUT request for updating task
+* DELETE request for removing task
+* Refetch tasks after every mutation to keep UI in sync
+
+This ensures proper server-state synchronization.
+
+---
+
+### 4 Task Creation Feature
+
+Implemented using React Hook Form:
+
+Form fields include:
+
+* Title
+* Description
+* Project
+* Type (Bug / Feature)
+* Status (Todo / In Progress)
+* Priority (Low / Medium / High)
+* Assignee
+* Due Date
+
+Behavior:
+
+* Submit button disabled during API call
+* Finland date format (fi-FI) for display
+* Toast message shown after successful operation
+* Latest task appears at top
+
+---
+
+### 5 Unified Add & Edit Form
+
+* Single form handles both Add and Edit
+* Pre-fills form when editing
+* Button changes to “Update Task”
+* Cancel option resets editing state
+
+Improves UX and avoids duplicate UI patterns.
+
+---
+
+### 6 Dashboard UI Enhancements
+
+Implemented:
+
+* Card-based grid layout
+* Type badges (Bug / Feature)
+* Status display
+* Priority & Assignee metadata
+* Finland date formatting (DD.MM.YYYY)
+* Smooth animations
+* Skeleton loading state
+* Toast notifications
+
+---
+
+### 7 Search & Advanced Filters
+
+Implemented dynamic filtering using `useMemo`:
+
+* Search by task title
+* Filter by Status
+* Filter by Project
+* Filter by Assignee
+* Filter by Priority
+* Clear Filters button
+* Dynamic Task Count display
+
+Example:
+
+```
+Tasks (5)
+```
+
+---
+
+### 8 Key Technical Decisions
+
+* Used Redux Saga instead of Thunk for better control over async workflows.
+* Refetched task list after create/update/delete to prevent stale state.
+* Used immutable operations when reversing task order.
+* Structured project using feature-based architecture.
+* Applied region-specific formatting using `toLocaleDateString("fi-FI")`.
+
+---
+
+##  Final Features Implemented
+
+✔ Create Task
+✔ Read Tasks
+✔ Update Task
+✔ Delete Task
+✔ Finland Date Format
+✔ Unified Add/Edit UI
+✔ Dashboard Card Layout
+✔ Search
+✔ Multi-Level Filters
+✔ Clear Filters
+✔ Task Count
+✔ Toast Notifications
+✔ Skeleton Loading
+✔ Proper State Synchronization
+
+---
