@@ -1,4 +1,4 @@
-import { call, put, takeLatest } from "redux-saga/effects";
+import { call, put, takeLatest, delay } from "redux-saga/effects";
 import {
   fetchTasksRequest,
   fetchTasksSuccess,
@@ -11,6 +11,7 @@ import { getTasksApi, createTaskApi } from "./tasksApi";
 
 function* fetchTasks() {
   try {
+    yield delay(500);
     const response = yield call(getTasksApi);
     yield put(fetchTasksSuccess(response.data));
   } catch (error) {
@@ -20,13 +21,15 @@ function* fetchTasks() {
 
 function* createTask(action) {
   try {
-    // Step 1: Create task in API
+    // simulate real API delay
+    yield delay(800);
+
+    // create task
     yield call(createTaskApi, action.payload);
 
-    // Step 2: Fetch latest tasks from API
+    // fetch updated tasks
     const response = yield call(getTasksApi);
 
-    // Step 3: Update redux store with fresh data
     yield put(fetchTasksSuccess(response.data));
 
   } catch (error) {

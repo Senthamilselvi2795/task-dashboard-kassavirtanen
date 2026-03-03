@@ -1,10 +1,17 @@
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { createTaskRequest } from "../features/tasks/tasksSlice";
 
 export default function TaskForm() {
   const dispatch = useDispatch();
-  const { register, handleSubmit, reset } = useForm();
+  const { loading } = useSelector((state) => state.tasks);
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors }
+  } = useForm();
 
   const onSubmit = (data) => {
     dispatch(createTaskRequest(data));
@@ -12,18 +19,32 @@ export default function TaskForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <input
-        {...register("title", { required: true })}
-        placeholder="Title"
-      />
+    <form onSubmit={handleSubmit(onSubmit)} className="form-container">
+      <div>
+        <input
+          {...register("title", { required: "Title is required" })}
+          placeholder="Task Title"
+        />
+        {errors.title && (
+          <p className="error">{errors.title.message}</p>
+        )}
+      </div>
 
-      <textarea
-        {...register("description", { required: true })}
-        placeholder="Description"
-      />
+      <div>
+        <textarea
+          {...register("description", {
+            required: "Description is required"
+          })}
+          placeholder="Task Description"
+        />
+        {errors.description && (
+          <p className="error">{errors.description.message}</p>
+        )}
+      </div>
 
-      <button type="submit">Add Task</button>
+      <button type="submit" disabled={loading}>
+        {loading ? "Adding..." : "Add Task"}
+      </button>
     </form>
   );
 }

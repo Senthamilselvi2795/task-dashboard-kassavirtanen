@@ -5,28 +5,31 @@ import TaskForm from "./components/TaskForm";
 
 function App() {
   const dispatch = useDispatch();
-  const { tasks, loading } = useSelector((state) => state.tasks);
-
+const { tasks, loading, error } = useSelector(
+  (state) => state.tasks
+);
   useEffect(() => {
     dispatch(fetchTasksRequest());
   }, [dispatch]);
 
   return (
-    <div>
-      <h2>Tasks</h2>
+  <div className="container">
+    <h2>Tasks</h2>
 
-      <TaskForm />
+    <TaskForm />
 
-      {loading && <p>Loading...</p>}
+    {loading && <div className="spinner"></div>}
 
-      {tasks.map((task) => (
-        <div key={task.id}>
-          <h4>{task.title}</h4>
-          <p>{task.description}</p>
-        </div>
-      ))}
-    </div>
-  );
+    {error && <p className="error">{error}</p>}
+
+    {tasks.map((task) => (
+      <div key={task.id} className="task-card">
+        <h4>{task.title}</h4>
+        <p>{task.description}</p>
+      </div>
+    ))}
+  </div>
+);
 }
 
 export default App;
