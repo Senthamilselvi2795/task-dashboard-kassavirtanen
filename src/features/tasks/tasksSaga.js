@@ -20,8 +20,15 @@ function* fetchTasks() {
 
 function* createTask(action) {
   try {
-    const response = yield call(createTaskApi, action.payload);
-    yield put(createTaskSuccess(response.data));
+    // Step 1: Create task in API
+    yield call(createTaskApi, action.payload);
+
+    // Step 2: Fetch latest tasks from API
+    const response = yield call(getTasksApi);
+
+    // Step 3: Update redux store with fresh data
+    yield put(fetchTasksSuccess(response.data));
+
   } catch (error) {
     yield put(createTaskFailure(error.message));
   }

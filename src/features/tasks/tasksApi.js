@@ -1,8 +1,11 @@
 import axios from "axios";
 
-const BASE_URL = "https://your-api-url.com";
+const BASE_URL = "http://localhost:5000";
 
-export const getTasksApi = () => axios.get(`${BASE_URL}/tasks`);
+export const getTasksApi = () => {
+  return axios.get(`${BASE_URL}/tasks`);
+};
 
-export const createTaskApi = (data) =>
-  axios.post(`${BASE_URL}/tasks`, data);
+export const createTaskApi = (data) => {
+  return axios.post(`${BASE_URL}/tasks`, data);
+};
