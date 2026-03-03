@@ -1,35 +1,60 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchTasksRequest } from "./features/tasks/tasksSlice";
 import TaskForm from "./components/TaskForm";
+import {
+  fetchTasksRequest,
+  clearMessage
+} from "./features/tasks/tasksSlice";
 
 function App() {
   const dispatch = useDispatch();
-const { tasks, loading, error } = useSelector(
-  (state) => state.tasks
-);
+
+  const { tasks, loading, error, successMessage } =
+    useSelector((state) => state.tasks);
+
   useEffect(() => {
     dispatch(fetchTasksRequest());
   }, [dispatch]);
 
+  // Auto clear toast after 2 seconds
+  useEffect(() => {
+    if (successMessage) {
+      const timer = setTimeout(() => {
+        dispatch(clearMessage());
+      }, 2000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [successMessage, dispatch]);
+
   return (
-  <div className="container">
-    <h2>Tasks</h2>
+    <div className="container">
+      {successMessage && (
+        <div className="toast">{successMessage}</div>
+      )}
 
-    <TaskForm />
+      <h2>Tasks</h2>
 
-    {loading && <div className="spinner"></div>}
+      <TaskForm />
 
-    {error && <p className="error">{error}</p>}
+      {error && <p className="error">{error}</p>}
 
-    {tasks.map((task) => (
-      <div key={task.id} className="task-card">
-        <h4>{task.title}</h4>
-        <p>{task.description}</p>
-      </div>
-    ))}
-  </div>
-);
+      {loading && (
+        <>
+          <div className="skeleton"></div>
+          <div className="skeleton"></div>
+        </>
+      )}
+
+      {!loading &&
+        tasks.map((task) => (
+          <div key={task.id} className="task-card">
+            <h4>{task.title}</h4>
+            <p>{task.description}</p>
+          </div>
+        ))}
+    </div>
+  );
 }
 
 export default App;
